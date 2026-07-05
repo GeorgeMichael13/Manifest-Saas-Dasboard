@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-ink text-paper font-body antialiased;
+}
+
+/* Signature element: perforated shipping-ticket stat card.
+   The dashed notch + circular cutouts evoke a tear-off manifest ticket. */
+.ticket {
+  position: relative;
+  background: theme('colors.ink.light');
+  border: 1px solid theme('colors.ink.lighter');
+  border-radius: 4px;
+}
+
+.ticket::before,
+.ticket::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: theme('colors.ink.DEFAULT');
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.ticket::before {
+  left: -9px;
+}
+
+.ticket::after {
+  right: -9px;
+}
+
+.ticket-perforation {
+  border-left: 2px dashed theme('colors.ink.lighter');
+}
+
+/* subtle scrollbar to match the ledger aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.ink.lighter');
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

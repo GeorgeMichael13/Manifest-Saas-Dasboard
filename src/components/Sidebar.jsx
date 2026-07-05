@@ -42,7 +42,7 @@ export default function Sidebar() {
         <p className="text-xs text-paper/40 font-mono leading-relaxed">
           DATA SOURCE
           <br />
-          dummyjson.com
+          Manifest Store
         </p>
       </div>
     </aside>

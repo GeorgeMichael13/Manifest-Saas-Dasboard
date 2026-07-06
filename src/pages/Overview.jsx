@@ -63,7 +63,7 @@ export default function Overview() {
     <div>
       <Topbar
         title="Overview"
-        subtitle="Store performance at a glance — pulled live from DummyJSON"
+        subtitle="Store performance "
       />
 
       {loading && <LoadingState />}

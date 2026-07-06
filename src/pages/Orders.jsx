@@ -50,44 +50,73 @@ export default function Orders() {
           {sorted.length === 0 ? (
             <EmptyState message="No orders to show." />
           ) : (
-            <div className="bg-ink-light border border-ink-lighter rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-ink-lighter text-left text-xs font-mono uppercase text-paper/40">
-                    <th className="px-4 py-3 font-medium">Order ID</th>
-                    <th className="px-4 py-3 font-medium">Customer ID</th>
-                    <th className="px-4 py-3 font-medium">Items</th>
-                    <th className="px-4 py-3 font-medium">Quantity</th>
-                    <th className="px-4 py-3 font-medium">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sorted.map((cart) => (
-                    <tr
-                      key={cart.id}
-                      className="border-b border-ink-lighter/60 last:border-0 hover:bg-ink-lighter/40"
-                    >
-                      <td className="px-4 py-3 font-mono text-amber">
+            <>
+              {/* Mobile: stacked cards */}
+              <div className="sm:hidden flex flex-col gap-3">
+                {sorted.map((cart) => (
+                  <div key={cart.id} className="ticket-flat p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-mono text-amber text-sm">
                         #{String(cart.id).padStart(4, '0')}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-paper/60">
-                        USR-{cart.userId}
-                      </td>
-                      <td className="px-4 py-3 text-paper/80">
-                        {cart.totalProducts} product
-                        {cart.totalProducts !== 1 ? 's' : ''}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-paper/60">
-                        {cart.totalQuantity}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-paper/90">
+                      </span>
+                      <span className="font-mono text-paper/90 text-sm">
                         {formatCurrency(cart.discountedTotal)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs font-mono text-paper/50">
+                      <span>USR-{cart.userId}</span>
+                      <span>
+                        {cart.totalProducts} product
+                        {cart.totalProducts !== 1 ? 's' : ''} ·{' '}
+                        {cart.totalQuantity} qty
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* sm and up: table */}
+              <div className="hidden sm:block bg-ink-light border border-ink-lighter rounded-lg overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-ink-lighter text-left text-xs font-mono uppercase text-paper/40">
+                        <th className="px-4 py-3 font-medium">Order ID</th>
+                        <th className="px-4 py-3 font-medium">Customer ID</th>
+                        <th className="px-4 py-3 font-medium">Items</th>
+                        <th className="px-4 py-3 font-medium">Quantity</th>
+                        <th className="px-4 py-3 font-medium">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sorted.map((cart) => (
+                        <tr
+                          key={cart.id}
+                          className="border-b border-ink-lighter/60 last:border-0 hover:bg-ink-lighter/40"
+                        >
+                          <td className="px-4 py-3 font-mono text-amber">
+                            #{String(cart.id).padStart(4, '0')}
+                          </td>
+                          <td className="px-4 py-3 font-mono text-paper/60">
+                            USR-{cart.userId}
+                          </td>
+                          <td className="px-4 py-3 text-paper/80">
+                            {cart.totalProducts} product
+                            {cart.totalProducts !== 1 ? 's' : ''}
+                          </td>
+                          <td className="px-4 py-3 font-mono text-paper/60">
+                            {cart.totalQuantity}
+                          </td>
+                          <td className="px-4 py-3 font-mono text-paper/90">
+                            {formatCurrency(cart.discountedTotal)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </>
           )}
         </>
       )}

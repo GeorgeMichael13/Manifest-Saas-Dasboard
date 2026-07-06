@@ -87,55 +87,87 @@ export default function Products() {
           {filtered.length === 0 ? (
             <EmptyState message="No products match your filters." />
           ) : (
-            <div className="bg-ink-light border border-ink-lighter rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-ink-lighter text-left text-xs font-mono uppercase text-paper/40">
-                    <th className="px-4 py-3 font-medium">Product</th>
-                    <th className="px-4 py-3 font-medium">Category</th>
-                    <th className="px-4 py-3 font-medium">Price</th>
-                    <th className="px-4 py-3 font-medium">Rating</th>
-                    <th className="px-4 py-3 font-medium">Stock</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.slice(0, 30).map((p) => (
-                    <tr
-                      key={p.id}
-                      className="border-b border-ink-lighter/60 last:border-0 hover:bg-ink-lighter/40"
-                    >
-                      <td className="px-4 py-3 flex items-center gap-3">
-                        <img
-                          src={p.thumbnail}
-                          alt={p.title}
-                          className="w-8 h-8 rounded object-cover bg-ink-lighter"
-                          loading="lazy"
-                        />
-                        <span className="text-paper/90">{p.title}</span>
-                      </td>
-                      <td className="px-4 py-3 text-paper/60 capitalize">
+            <>
+              {/* Mobile: stacked cards */}
+              <div className="sm:hidden flex flex-col gap-3">
+                {filtered.slice(0, 30).map((p) => (
+                  <div key={p.id} className="ticket-flat p-4 flex gap-3">
+                    <img
+                      src={p.thumbnail}
+                      alt={p.title}
+                      className="w-12 h-12 rounded object-cover bg-ink-lighter shrink-0"
+                      loading="lazy"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-paper/90 text-sm truncate">{p.title}</p>
+                      <p className="text-xs text-paper/50 font-mono capitalize mt-0.5">
                         {p.category}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-paper/90">
-                        {formatCurrency(p.price)}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-paper/60">
-                        {p.rating.toFixed(1)}
-                      </td>
-                      <td className="px-4 py-3">
+                      </p>
+                      <div className="flex items-center justify-between mt-2">
+                        <span className="font-mono text-sm text-paper/90">
+                          {formatCurrency(p.price)}
+                        </span>
                         <StockBadge stock={p.stock} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* sm and up: table */}
+              <div className="hidden sm:block bg-ink-light border border-ink-lighter rounded-lg overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-ink-lighter text-left text-xs font-mono uppercase text-paper/40">
+                        <th className="px-4 py-3 font-medium">Product</th>
+                        <th className="px-4 py-3 font-medium">Category</th>
+                        <th className="px-4 py-3 font-medium">Price</th>
+                        <th className="px-4 py-3 font-medium">Rating</th>
+                        <th className="px-4 py-3 font-medium">Stock</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filtered.slice(0, 30).map((p) => (
+                        <tr
+                          key={p.id}
+                          className="border-b border-ink-lighter/60 last:border-0 hover:bg-ink-lighter/40"
+                        >
+                          <td className="px-4 py-3 flex items-center gap-3">
+                            <img
+                              src={p.thumbnail}
+                              alt={p.title}
+                              className="w-8 h-8 rounded object-cover bg-ink-lighter"
+                              loading="lazy"
+                            />
+                            <span className="text-paper/90">{p.title}</span>
+                          </td>
+                          <td className="px-4 py-3 text-paper/60 capitalize">
+                            {p.category}
+                          </td>
+                          <td className="px-4 py-3 font-mono text-paper/90">
+                            {formatCurrency(p.price)}
+                          </td>
+                          <td className="px-4 py-3 font-mono text-paper/60">
+                            {p.rating.toFixed(1)}
+                          </td>
+                          <td className="px-4 py-3">
+                            <StockBadge stock={p.stock} />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
               {filtered.length > 30 && (
-                <p className="text-xs font-mono text-paper/30 px-4 py-3">
+                <p className="text-xs font-mono text-paper/30 px-1 sm:px-4 py-3">
                   Showing 30 of {filtered.length} results — refine your search
                   to narrow further.
                 </p>
               )}
-            </div>
+            </>
           )}
         </>
       )}

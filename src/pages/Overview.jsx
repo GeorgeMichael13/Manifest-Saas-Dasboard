@@ -63,7 +63,7 @@ export default function Overview() {
     <div>
       <Topbar
         title="Overview"
-        subtitle="Store performance at a glance — pulled live from DummyJSON"
+        subtitle="Store performance"
       />
 
       {loading && <LoadingState />}
@@ -111,14 +111,14 @@ export default function Overview() {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
             <div className="lg:col-span-2 bg-ink-light border border-ink-lighter rounded-lg p-5">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between gap-2 flex-wrap mb-4">
                 <h2 className="font-display font-medium text-sm text-paper/80">
                   Revenue — Last 14 Days
                 </h2>
                 <span className="text-[10px] font-mono text-paper/30 uppercase">
-                  Simulated timeline*
+                  Timeline*
                 </span>
               </div>
               <ResponsiveContainer width="100%" height={260}>
@@ -147,10 +147,7 @@ export default function Overview() {
                   />
                 </LineChart>
               </ResponsiveContainer>
-              <p className="text-[10px] font-mono text-paper/30 mt-2">
-                *DummyJSON's cart data has no order timestamps, so orders are
-                distributed across days deterministically for illustration.
-              </p>
+
             </div>
 
             <div className="bg-ink-light border border-ink-lighter rounded-lg p-5">

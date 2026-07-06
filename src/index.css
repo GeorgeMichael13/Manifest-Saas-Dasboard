@@ -6,10 +6,32 @@ body {
   @apply bg-ink text-paper font-body antialiased;
 }
 
+/* Shared dashboard box — keeps chart/content cards the same size and rhythm */
+.card {
+  background: theme('colors.ink.light');
+  border: 1px solid theme('colors.ink.lighter');
+  border-radius: 8px;
+  padding: theme('spacing.5');
+  min-height: 340px;
+}
+
+@media (max-width: 639px) {
+  .card {
+    padding: theme('spacing.4');
+    min-height: 0;
+  }
+}
+
 /* Signature element: perforated shipping-ticket stat card.
    The dashed notch + circular cutouts evoke a tear-off manifest ticket. */
 .ticket {
   position: relative;
+  background: theme('colors.ink.light');
+  border: 1px solid theme('colors.ink.lighter');
+  border-radius: 4px;
+}
+
+.ticket-flat {
   background: theme('colors.ink.light');
   border: 1px solid theme('colors.ink.lighter');
   border-radius: 4px;
@@ -44,9 +66,11 @@ body {
   width: 8px;
   height: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: theme('colors.ink.lighter');
   border-radius: 999px;

@@ -14,27 +14,26 @@ export default function StatCard({ label, value, delta, deltaLabel, icon: Icon }
 
   return (
     <div className="ticket flex items-stretch">
-      <div className="flex-1 p-5">
-        <div className="flex items-center justify-between mb-3">
+      <div className="flex-1 p-4 sm:p-5">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
           <p className="text-xs font-mono uppercase tracking-wider text-paper/40">
             {label}
           </p>
           {Icon && <Icon size={16} className="text-paper/30" />}
         </div>
-        <p className="font-mono text-2xl font-semibold text-paper">{value}</p>
+        <p className="font-mono text-xl sm:text-2xl font-semibold text-paper">{value}</p>
         {delta !== undefined && (
           <p
-            className={`text-xs font-mono mt-2 ${
-              isPositive ? 'text-teal-light' : 'text-alert'
-            }`}
+            className={`text-xs font-mono mt-2 ${isPositive ? 'text-teal-light' : 'text-alert'
+              }`}
           >
             {isPositive ? '▲' : '▼'} {Math.abs(delta)}% {deltaLabel}
           </p>
         )}
       </div>
-      <div className="ticket-perforation w-10 flex items-center justify-center">
+      <div className="ticket-perforation w-8 sm:w-10 flex items-center justify-center">
         <span
-          className="text-[10px] font-mono text-paper/30 tracking-widest"
+          className="text-[9px] sm:text-[10px] font-mono text-paper/30 tracking-widest"
           style={{ writingMode: 'vertical-rl' }}
         >
           NO. {ticketNumber(label)}

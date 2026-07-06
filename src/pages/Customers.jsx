@@ -46,52 +46,87 @@ export default function Customers() {
           {rows.length === 0 ? (
             <EmptyState message="No customers to show." />
           ) : (
-            <div className="bg-ink-light border border-ink-lighter rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-ink-lighter text-left text-xs font-mono uppercase text-paper/40">
-                    <th className="px-4 py-3 font-medium">Customer</th>
-                    <th className="px-4 py-3 font-medium">Location</th>
-                    <th className="px-4 py-3 font-medium">Orders</th>
-                    <th className="px-4 py-3 font-medium">Lifetime Spend</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows.slice(0, 30).map((u) => (
-                    <tr
-                      key={u.id}
-                      className="border-b border-ink-lighter/60 last:border-0 hover:bg-ink-lighter/40"
-                    >
-                      <td className="px-4 py-3 flex items-center gap-3">
-                        <img
-                          src={u.image}
-                          alt={`${u.firstName} ${u.lastName}`}
-                          className="w-8 h-8 rounded-full object-cover bg-ink-lighter"
-                          loading="lazy"
-                        />
-                        <div>
-                          <p className="text-paper/90">
-                            {u.firstName} {u.lastName}
-                          </p>
-                          <p className="text-xs text-paper/40 font-mono">
-                            {u.email}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 text-paper/60">
-                        {u.address?.city}, {u.address?.state}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-paper/60">
-                        {u.orders}
-                      </td>
-                      <td className="px-4 py-3 font-mono text-paper/90">
-                        {formatCurrency(u.spent)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <>
+              {/* Mobile: stacked cards */}
+              <div className="sm:hidden flex flex-col gap-3">
+                {rows.slice(0, 30).map((u) => (
+                  <div key={u.id} className="ticket-flat p-4 flex gap-3">
+                    <img
+                      src={u.image}
+                      alt={`${u.firstName} ${u.lastName}`}
+                      className="w-11 h-11 rounded-full object-cover bg-ink-lighter shrink-0"
+                      loading="lazy"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-paper/90 text-sm truncate">
+                        {u.firstName} {u.lastName}
+                      </p>
+                      <p className="text-xs text-paper/40 font-mono truncate">
+                        {u.email}
+                      </p>
+                      <div className="flex items-center justify-between mt-2 text-xs font-mono">
+                        <span className="text-paper/50">
+                          {u.address?.city}, {u.address?.state}
+                        </span>
+                        <span className="text-paper/90">
+                          {formatCurrency(u.spent)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* sm and up: table */}
+              <div className="hidden sm:block bg-ink-light border border-ink-lighter rounded-lg overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-ink-lighter text-left text-xs font-mono uppercase text-paper/40">
+                        <th className="px-4 py-3 font-medium">Customer</th>
+                        <th className="px-4 py-3 font-medium">Location</th>
+                        <th className="px-4 py-3 font-medium">Orders</th>
+                        <th className="px-4 py-3 font-medium">Lifetime Spend</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rows.slice(0, 30).map((u) => (
+                        <tr
+                          key={u.id}
+                          className="border-b border-ink-lighter/60 last:border-0 hover:bg-ink-lighter/40"
+                        >
+                          <td className="px-4 py-3 flex items-center gap-3">
+                            <img
+                              src={u.image}
+                              alt={`${u.firstName} ${u.lastName}`}
+                              className="w-8 h-8 rounded-full object-cover bg-ink-lighter"
+                              loading="lazy"
+                            />
+                            <div>
+                              <p className="text-paper/90">
+                                {u.firstName} {u.lastName}
+                              </p>
+                              <p className="text-xs text-paper/40 font-mono">
+                                {u.email}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="px-4 py-3 text-paper/60">
+                            {u.address?.city}, {u.address?.state}
+                          </td>
+                          <td className="px-4 py-3 font-mono text-paper/60">
+                            {u.orders}
+                          </td>
+                          <td className="px-4 py-3 font-mono text-paper/90">
+                            {formatCurrency(u.spent)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </>
           )}
         </>
       )}

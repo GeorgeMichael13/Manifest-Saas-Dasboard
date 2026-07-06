@@ -63,7 +63,7 @@ export default function Overview() {
     <div>
       <Topbar
         title="Overview"
-        subtitle="Store performance"
+        subtitle="Store performance at a glance — pulled live from DummyJSON"
       />
 
       {loading && <LoadingState />}
@@ -118,7 +118,7 @@ export default function Overview() {
                   Revenue — Last 14 Days
                 </h2>
                 <span className="text-[10px] font-mono text-paper/30 uppercase">
-                  Timeline*
+                  Simulated timeline*
                 </span>
               </div>
               <ResponsiveContainer width="100%" height={260}>
@@ -147,7 +147,10 @@ export default function Overview() {
                   />
                 </LineChart>
               </ResponsiveContainer>
-
+              <p className="text-[10px] font-mono text-paper/30 mt-2">
+                *DummyJSON's cart data has no order timestamps, so orders are
+                distributed across days deterministically for illustration.
+              </p>
             </div>
 
             <div className="bg-ink-light border border-ink-lighter rounded-lg p-5">
